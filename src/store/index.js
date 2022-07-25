@@ -6,6 +6,7 @@ export default createStore({
     products: [],
     cartList: {},
     tempProduct: {},
+    token: '',
   },
   mutations: {
     setProducts(state, payload) {
@@ -16,6 +17,9 @@ export default createStore({
     },
     setTempProduct(state, payload) {
       state.tempProduct = payload;
+    },
+    setToken(state, payload) {
+      state.token = payload;
     },
   },
   actions: {

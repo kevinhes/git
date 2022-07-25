@@ -14,6 +14,10 @@ const routes = [
       },
     ],
   },
+  {
+    path: '/loginpage',
+    component: () => import('../views/backstage/LoginPage.vue'),
+  },
 ];
 
 const router = createRouter({
