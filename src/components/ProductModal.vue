@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import Modal from '../../node_modules/bootstrap/js/dist/modal';
+import ModalMixin from '@/mixins/modal';
 
 export default {
   data() {
@@ -53,10 +53,8 @@ export default {
       return this.$store.state.tempProduct;
     },
   },
+  mixins: [ModalMixin],
   methods: {
-    openModal() {
-      this.modal.show();
-    },
     addToCart() {
       if (this.qty >= 1) {
         this.$emit('add-to-cart', this.tempProduct, this.qty);
@@ -65,9 +63,6 @@ export default {
         alert('商品數量不得小於 1 ');
       }
     },
-  },
-  mounted() {
-    this.modal = new Modal(this.$refs.modal);
   },
 };
 </script>

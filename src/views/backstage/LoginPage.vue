@@ -42,9 +42,9 @@ export default {
     login() {
       this.$http.post(`${process.env.VUE_APP_API}/v2/admin/signin`, this.user)
         .then((res) => {
-          console.log(res);
           const { token, expired } = res.data;
           document.cookie = `hextoken=${token}; expires=${expired}`;
+          this.$router.push('/adminhome');
         })
         .catch(() => {
           alert('登入失敗，請重新登入');

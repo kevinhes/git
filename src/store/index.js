@@ -1,12 +1,22 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
 
+const backstageModule = {
+  state: () => ({
+    adminProducts: [],
+  }),
+  mutations: {
+    setAdminProducts(state, payload) {
+      state.adminProducts = payload;
+    },
+  },
+};
+
 export default createStore({
   state: {
     products: [],
     cartList: {},
     tempProduct: {},
-    token: '',
   },
   mutations: {
     setProducts(state, payload) {
@@ -17,9 +27,6 @@ export default createStore({
     },
     setTempProduct(state, payload) {
       state.tempProduct = payload;
-    },
-    setToken(state, payload) {
-      state.token = payload;
     },
   },
   actions: {
@@ -44,5 +51,6 @@ export default createStore({
     },
   },
   modules: {
+    backstageModule,
   },
 });

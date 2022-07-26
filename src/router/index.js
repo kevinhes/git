@@ -18,6 +18,17 @@ const routes = [
     path: '/loginpage',
     component: () => import('../views/backstage/LoginPage.vue'),
   },
+  {
+    path: '/adminhome',
+    component: () => import('../views/backstage/adminHome.vue'),
+    children: [
+      {
+        path: '',
+        name: 'adminproduct',
+        component: () => import('../views/backstage/adminProduct.vue'),
+      },
+    ],
+  },
 ];
 
 const router = createRouter({
