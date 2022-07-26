@@ -4,10 +4,14 @@ import axios from 'axios';
 const backstageModule = {
   state: () => ({
     adminProducts: [],
+    adminPagination: {},
   }),
   mutations: {
     setAdminProducts(state, payload) {
       state.adminProducts = payload;
+    },
+    setAdminPagination(state, payload) {
+      state.adminPagination = payload;
     },
   },
 };
