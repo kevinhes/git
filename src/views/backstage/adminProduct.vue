@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="text-end mt-4">
-      <button class="btn btn-primary">
+      <button class="btn btn-primary" @click="openModal('new')">
         建立新的產品
       </button>
     </div>
@@ -39,7 +39,7 @@
           <td>
             <div class="btn-group">
               <button type="button" class="btn btn-outline-primary btn-sm"
-              @click="openModal('edit')">
+              @click="openModal('edit', product)">
                 編輯
               </button>
               <button type="button" class="btn btn-outline-danger btn-sm">
@@ -51,7 +51,7 @@
       </tbody>
     </table>
     <pagination :pagination="pagination" @get-products="getProducts"></pagination>
-    <adminProductModal ref="adminProductModal"></adminProductModal>
+    <adminProductModal ref="adminProductModal" @get-products="getProducts"></adminProductModal>
   </div>
 </template>
 
@@ -84,8 +84,18 @@ export default {
           alert('驗證錯誤，請重新登入');
         });
     },
-    openModal(status) {
+    openModal(status, product) {
       if (status === 'new') {
+        this.$store.commit('setadminTempProduct', {});
+        this.$store.commit('setadminTempProduct', {
+          imagesUrl: [],
+        });
+        this.$store.commit('setIsNew', true);
+        this.$refs.adminProductModal.openModal();
+      } else if (status === 'edit') {
+        const obj = JSON.parse(JSON.stringify(product));
+        this.$store.commit('setadminTempProduct', obj);
+        this.$store.commit('setIsNew', false);
         this.$refs.adminProductModal.openModal();
       }
     },

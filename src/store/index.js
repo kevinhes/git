@@ -5,6 +5,8 @@ const backstageModule = {
   state: () => ({
     adminProducts: [],
     adminPagination: {},
+    adminTempProduct: {},
+    isNew: false,
   }),
   mutations: {
     setAdminProducts(state, payload) {
@@ -12,6 +14,12 @@ const backstageModule = {
     },
     setAdminPagination(state, payload) {
       state.adminPagination = payload;
+    },
+    setadminTempProduct(state, payload) {
+      state.adminTempProduct = payload;
+    },
+    setIsNew(state, payload) {
+      state.isNew = payload;
     },
   },
 };
