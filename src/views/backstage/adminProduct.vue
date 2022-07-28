@@ -42,7 +42,8 @@
               @click="openModal('edit', product)">
                 編輯
               </button>
-              <button type="button" class="btn btn-outline-danger btn-sm">
+              <button type="button" class="btn btn-outline-danger btn-sm"
+              @click="openModal('delete', product)">
                 刪除
               </button>
             </div>
@@ -52,6 +53,8 @@
     </table>
     <pagination :pagination="pagination" @get-products="getProducts"></pagination>
     <adminProductModal ref="adminProductModal" @get-products="getProducts"></adminProductModal>
+    <AdminDelProductModal ref="adminDelProductModal"
+    @get-products="getProducts"></AdminDelProductModal>
   </div>
 </template>
 
@@ -59,6 +62,7 @@
 import { mapState } from 'vuex';
 import pagination from '@/components/Pagination.vue';
 import adminProductModal from '@/components/backstage/adminProductModal.vue';
+import AdminDelProductModal from '@/components/backstage/AdminDelProductModal.vue';
 
 export default {
   data() {
@@ -97,12 +101,18 @@ export default {
         this.$store.commit('setadminTempProduct', obj);
         this.$store.commit('setIsNew', false);
         this.$refs.adminProductModal.openModal();
+      } else if (status === 'delete') {
+        const obj = JSON.parse(JSON.stringify(product));
+        this.$store.commit('setadminTempProduct', obj);
+        this.$store.commit('setIsNew', false);
+        this.$refs.adminDelProductModal.openModal();
       }
     },
   },
   components: {
     pagination,
     adminProductModal,
+    AdminDelProductModal,
   },
   mounted() {
     this.$http.defaults.headers.common.Authorization = this.token;
